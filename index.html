@@ -177,31 +177,9 @@
         <h1 id="Python文件打包封装为exe"><a href="#Python文件打包封装为exe" class="headerlink" title="Python文件打包封装为exe"></a>Python文件打包封装为exe</h1><h2 id="一、创建虚拟环境"><a href="#一、创建虚拟环境" class="headerlink" title="一、创建虚拟环境"></a>一、创建虚拟环境</h2><ul>
 <li><strong>使用虚拟环境封装，会避免封装用不到的库，降低文件大小</strong></li>
 </ul>
-<ol>
-<li>Pycharm中，文件，新建项目，选择Flask，选择一个位置，在后面添加<code>\项目名</code>用于创建一个名字为项目名的文件夹，创建</li>
-<li>删掉目录下的默认生成的文件，将要打包的文件粘贴进来</li>
-<li>使用<code>python -m venv venv</code>创建虚拟环境，成功后会生成一个<code>venv</code>的目录，里面是虚拟环境的配置文件</li>
-<li>修改解释器为虚拟环境，Pycharm中，文件，设置，项目:项目名，Python解释器，全部显示，添加，Virtualenv环境，现有环境，检查下目录无误后确定，选择刚创建的解释器，确定，应用，确定</li>
-<li>关闭Pycharm的终端后重新打开，使用<code>pip list</code>，只有<code>pip</code>和<code>setuptools</code>两个的话就说明成功了</li>
-</ol>
-<h2 id="二、封装文件"><a href="#二、封装文件" class="headerlink" title="二、封装文件"></a>二、封装文件</h2><ul>
-<li>均在上述虚拟环境中操作，即Pycharm重新打开的终端中执行</li>
-</ul>
-<ol>
-<li>安装程序依赖的第三方库，否则后续无法使用</li>
-<li>安装封装打包pyinstaller库：<code>pip install pyinstaller</code></li>
-<li>执行打包命令：<code>pyinstaller -F -w 待封装的文件</code><ul>
-<li><code>-F</code>：打包为一个完整的.exe文件，没有此参数默认打包为一个目录</li>
-<li><code>-w</code>：隐藏运行程序时会出现的cmd窗口</li>
-</ul>
-</li>
-<li>打包好之后程序会出现在dist目录下，若报错可以在cmd中运行该程序查看错误位置和提示<ul>
-<li>常见错误1：缺少程序所依赖的第三方库</li>
-<li>常见错误2：缺少程序所使用的外部文件，如图片等</li>
-</ul>
-</li>
-</ol>
-
+        
+          <a class="article-more-a" href="/2022/11/01/Python%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E5%B0%81%E8%A3%85%E4%B8%BAexe/#more">more >></a>
+        
       
 
       
