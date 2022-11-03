@@ -30,7 +30,7 @@ i18n_dir: :lang #国际化文件夹
 skip_render: #跳过指定文件的渲染，您可使用glob来配置路径
 
 # Writing 写作配置
-new_post_name: :title.md # 新文章的文件名称  File name of new posts
+new_post_name: : 新博文.md # 新文章的文件名称  File name of new posts
 default_layout: post # 默认布局
 titlecase: false # Transform title into titlecase
 external_link:
@@ -39,7 +39,7 @@ external_link:
   exclude: ''
 filename_case: 0 #把文件名称转换成（1）小写或（2）大写
 render_drafts: false #是否显示草稿
-post_asset_folder: false #是否启动资源文件夹
+post_asset_folder: true #是否启动资源文件夹
 relative_link: false #把链接改为与根目录的相对位置
 future: true
 highlight: #代码块的设置
