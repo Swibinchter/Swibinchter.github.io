@@ -112,6 +112,8 @@ categories: 技术
 
    * 在GitHub中添加SSH key，位置在`Account` >>>> `Settings` >>>> `SSH Keys` >>>> `Add SSH Key` >>>> 在`Key`中粘贴`id_rsa.pub`文件中的内容
 
+   * 添加后在第一次`push`会提示进行确认，输入`yes`即可
+
 
 
 ### 三、Hexo在本地文件夹生成前端文件 
