@@ -198,9 +198,12 @@ categories: 技术
    比如主题Yilia，需删除.git文件夹、.gitignore、.gitattributes这三项
    ```
 
-7. 推送到远程仓库中(默认就是存放Hexo的源代码的分支(如`blog_hexo_soure_code`))
+7. 推送到远程仓库中(默认就是存放Hexo的源代码的分支(如`blog_hexo_soure_code`))，建议先配置下终端A的用户名，方便跟其他终端区分，这样可以在GitHub上区分每次`commit`对应的终端
 
    ```shell
+   # 设置终端A的用户名
+   git config --global user.name “xxxx(这个终端的用户名)” 
+   
    # 添加文件夹里所有文件修改到暂存区
    git add .
    # 提交add的修改到本地分支上
@@ -213,7 +216,11 @@ categories: 技术
 
 #### 二、添加新终端
 
-1. 新终端B安装必要的Git for windows、Node.js、Hexo，详见上文[环境准备](#environment)
+1. 新终端B安装必要的Git for windows、Node.js、Hexo，详见上文[环境准备](#environment)，配置一下这个终端上的用户名，便于跟其他终端做区分
+
+   ```shell
+   git config --global user.name “xxxx(这个终端的用户名)” 
+   ```
 
 2. 终端B上`clone`GitHub远程仓库，默认分支就是上一步建立的存放Hexo的源代码的分支(如`blog_hexo_soure_code`)
 
@@ -223,7 +230,6 @@ categories: 技术
        git clone git@github.com:你的github用户名/仓库名.git
        # 例如
        git clone git@github.com:Swibinchter/Swibinchter.github.io.git
-
        ```
 
    * Http方式，可以直接进行，但需要输入GitHub账户密码
