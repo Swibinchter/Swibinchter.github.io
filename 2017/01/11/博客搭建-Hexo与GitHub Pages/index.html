@@ -16,7 +16,7 @@
 <meta property="og:description" content="前记近期用Hexo和GitHub Pages搭建了自己的博客，做一个记录，也可以使用Gitee，弄懂原理后过程大同小异">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-01-11T11:44:54.000Z">
-<meta property="article:modified_time" content="2022-11-03T08:58:29.731Z">
+<meta property="article:modified_time" content="2022-11-03T09:17:39.114Z">
 <meta property="article:author" content="Swibinchter">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -255,6 +255,11 @@
 </li>
 <li><p>到这一步已经可以通过HTTPS方式与GitHub仓库进行通信，但每次都需要输入用户名和密码，推荐使用SSH的方式进行通信</p>
 </li>
+<li><p>设置本机的用户名和邮箱</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置git的终端用户名，也会在GitHub的commit记录中显示</span></span><br><span class="line">git config --global user.name &quot;aaa&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置git的邮箱</span></span><br><span class="line">git config --global user.email &quot;123@qq.com&quot;</span><br></pre></td></tr></table></figure>
+
+
+</li>
 <li><p>以<a id="SSH">SSH key</a>方式授予本机修改GitHub的权限</p>
 <ul>
 <li><p>创建本机SSH key，默认在用户主目录(C:&#x2F;User)下会生成.shh目录，包含</p>
@@ -265,6 +270,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这之后一路回车使用默认值即可</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在GitHub中添加SSH key，位置在<code>Account</code> &gt;&gt;&gt;&gt; <code>Settings</code> &gt;&gt;&gt;&gt; <code>SSH Keys</code> &gt;&gt;&gt;&gt; <code>Add SSH Key</code> &gt;&gt;&gt;&gt; 在<code>Key</code>中粘贴<code>id_rsa.pub</code>文件中的内容</p>
+</li>
+<li><p>添加后在第一次<code>push</code>会提示进行确认，输入<code>yes</code>即可</p>
 </li>
 </ul>
 </li>
@@ -314,8 +321,8 @@
 <li><p>检查themes文件夹的每个子文件夹，打开显示隐藏文件，删掉所有以<code>.git</code>开头的文件及文件夹，这一步是为了后续能让主题文件夹能成功推送，因为git不能嵌套上传</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如主题Yilia，需删除.git文件夹、.gitignore、.gitattributes这三项</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>推送到远程仓库中(默认就是存放Hexo的源代码的分支(如<code>blog_hexo_soure_code</code>))，建议先配置下终端A的用户名，方便跟其他终端区分，这样可以在GitHub上区分每次<code>commit</code>对应的终端</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置终端A的用户名</span></span><br><span class="line">git config --global user.name “xxxx(这个终端的用户名)” </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加文件夹里所有文件修改到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提交add的修改到本地分支上</span></span><br><span class="line">git commit -m &quot;第1次推送源代码的说明&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">推送本地分支的修改到远程仓库的对应分支上</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<li><p>推送到远程仓库中(默认就是存放Hexo的源代码的分支(如<code>blog_hexo_soure_code</code>))</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加文件夹里所有文件修改到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提交add的修改到本地分支上</span></span><br><span class="line">git commit -m &quot;第1次推送源代码的说明&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">推送本地分支的修改到远程仓库的对应分支上</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>至此，GitHub上已完成所有部署，<code>master</code>分支用于接收和存放Hexo推送的前端文件，新建并设置为默认的分支(如<code>blog_hexo_soure_code</code>)用于接收和存放Hexo的源代码</p>
 </li>
