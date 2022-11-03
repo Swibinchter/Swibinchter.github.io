@@ -87,7 +87,18 @@ categories: 技术
 
 2. 到这一步已经可以通过HTTPS方式与GitHub仓库进行通信，但每次都需要输入用户名和密码，推荐使用SSH的方式进行通信
 
-3. 以<a id="SSH">SSH key</a>方式授予本机修改GitHub的权限
+3. 设置本机的用户名和邮箱
+
+   ```shell
+   # 设置git的终端用户名，也会在GitHub的commit记录中显示
+   git config --global user.name "aaa"
+   # 设置git的邮箱
+   git config --global user.email "123@qq.com"
+   ```
+
+   
+
+4. 以<a id="SSH">SSH key</a>方式授予本机修改GitHub的权限
 
    * 创建本机SSH key，默认在用户主目录(C:/User)下会生成.shh目录，包含
 
@@ -198,12 +209,9 @@ categories: 技术
    比如主题Yilia，需删除.git文件夹、.gitignore、.gitattributes这三项
    ```
 
-7. 推送到远程仓库中(默认就是存放Hexo的源代码的分支(如`blog_hexo_soure_code`))，建议先配置下终端A的用户名，方便跟其他终端区分，这样可以在GitHub上区分每次`commit`对应的终端
+7. 推送到远程仓库中(默认就是存放Hexo的源代码的分支(如`blog_hexo_soure_code`))
 
    ```shell
-   # 设置终端A的用户名
-   git config --global user.name “xxxx(这个终端的用户名)” 
-   
    # 添加文件夹里所有文件修改到暂存区
    git add .
    # 提交add的修改到本地分支上
