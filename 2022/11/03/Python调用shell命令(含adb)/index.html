@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/11 | Blog of Swibinchter</title>
+  <title>Python调用shell命令(含adb) | Blog of Swibinchter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Swibinchter">
-<meta property="og:url" content="http://example.com/archives/2022/11/index.html">
+  <meta name="description" content="Python调用shell命令(含adb) 调用方式 subprocess模块调用【推荐，它出现就是为了替代os模块、commands模块等 】，一般使用run()，若无需等待命令执行完毕就往下进行的话使用Popen() os模块调用【不推荐】 commands模块调用   常见问题命令格式的问题 命令有特殊字符，如切换目录时中有&#x2F;，需要使用r&#39;命令字符串&#39;防止转义 命令的目录中如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python调用shell命令(含adb)">
+<meta property="og:url" content="http://example.com/2022/11/03/Python%E8%B0%83%E7%94%A8shell%E5%91%BD%E4%BB%A4(%E5%90%ABadb)/index.html">
 <meta property="og:site_name" content="Blog of Swibinchter">
+<meta property="og:description" content="Python调用shell命令(含adb) 调用方式 subprocess模块调用【推荐，它出现就是为了替代os模块、commands模块等 】，一般使用run()，若无需等待命令执行完毕就往下进行的话使用Popen() os模块调用【不推荐】 commands模块调用   常见问题命令格式的问题 命令有特殊字符，如切换目录时中有&#x2F;，需要使用r&#39;命令字符串&#39;防止转义 命令的目录中如">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T09:36:35.000Z">
+<meta property="article:modified_time" content="2022-11-04T11:04:30.181Z">
 <meta property="article:author" content="Swibinchter">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Blog of Swibinchter" type="application/atom+xml">
@@ -152,36 +157,265 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Python调用shell命令(含adb)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Python调用shell命令(含adb)
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/03/Python%E8%B0%83%E7%94%A8shell%E5%91%BD%E4%BB%A4(%E5%90%ABadb)/" class="archive-article-date">
+
+        
+        <a href="/2022/11/03/Python%E8%B0%83%E7%94%A8shell%E5%91%BD%E4%BB%A4(%E5%90%ABadb)/" class="archive-article-date">
   	<time datetime="2022-11-03T09:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/03/Python%E8%B0%83%E7%94%A8shell%E5%91%BD%E4%BB%A4(%E5%90%ABadb)/">Python调用shell命令(含adb)</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Python调用shell命令-含adb"><a href="#Python调用shell命令-含adb" class="headerlink" title="Python调用shell命令(含adb)"></a>Python调用shell命令(含adb)</h1><hr>
+<h2 id="调用方式"><a href="#调用方式" class="headerlink" title="调用方式"></a>调用方式</h2><ol>
+<li><a href="#subprocess">subprocess模块调用</a>【推荐，它出现就是为了替代os模块、commands模块等 】，一般使用<code>run()</code>，若无需等待命令执行完毕就往下进行的话使用<code>Popen()</code></li>
+<li><a href="#os">os模块调用</a>【不推荐】</li>
+<li><a href="#commands">commands模块调用</a></li>
+</ol>
+<hr>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="命令格式的问题"><a href="#命令格式的问题" class="headerlink" title="命令格式的问题"></a>命令格式的问题</h3><ol>
+<li>命令有特殊字符，如切换目录时中有<code>/</code>，需要使用<code>r&#39;命令字符串&#39;</code>防止转义</li>
+<li>命令的目录中如果有<code>Program Files (x86)</code>时，对部分cmd版本识别有问题无法正常执行，将目录使用引号包起来，如<code>cd &#39;C:\Program Files (x86)\Appium&#39;</code></li>
+</ol>
+<h3 id="常用的Shell命令"><a href="#常用的Shell命令" class="headerlink" title="常用的Shell命令"></a>常用的Shell命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装Appium的win.exe文件后，启动Appium服务，需要在main.js所在的目录下运行，一般是C:\Program Files (x86)\Appium\resources\app\node_modules\appium\build\lib</span></span><br><span class="line">node main.js</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看端口情况，筛选包含有<span class="string">&quot;:4437&quot;</span>字符的，如存在返回的结果中包含进程pid</span></span><br><span class="line">netstat -nao | findstr :4723</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">中止进程，可以用于中止Appium服务，进程pid可以从上个命令中获取</span></span><br><span class="line">taskkill /pid 进程pid -t -f</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<h3 id="常用的Adb命令"><a href="#常用的Adb命令" class="headerlink" title="常用的Adb命令"></a>常用的Adb命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前连接设备</span></span><br><span class="line">adb devices</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">无线连接设备，通过ip和端口</span></span><br><span class="line">adb connect IP地址:端口</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">断开所有连接</span></span><br><span class="line">adb disconnect</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>##一、<a id="subprocess">subprocess模块调用</a>【常用方法】</p>
+<ul>
+<li><p>允许创建很多子进程，创建的时候能指定子进程和子进程的输入、输出、错误输出管道，执行后能获取输出结果和执行状态。</p>
+</li>
+<li><p>运行python的时候，我们都是在创建并运行一个进程。像Linux进程那样，一个进程可以fork一个子进程，并让这个子进程exec另外一个程序。在Python中，通过标准库中的subprocess包来fork一个子进程，并运行一个外部的程序。 </p>
+</li>
+<li><p>Python自带的模块，Python版本建议大于3.5，使用时导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> subprocess</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="subprocess-run-【推荐使用】"><a href="#subprocess-run-【推荐使用】" class="headerlink" title="subprocess.run()【推荐使用】"></a>subprocess.run()【推荐使用】</h3><ul>
+<li><p><strong>常用示例</strong></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subprocess.run(<span class="string">&quot;adb devices&quot;</span>,capture_output=<span class="literal">True</span>,shell=<span class="literal">True</span>,cwd=<span class="string">r&#x27;C:\Users&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)   <span class="comment"># 执行shell命令，获取连接的adb设备</span></span><br><span class="line">subprocess.run([<span class="string">&#x27;adb&#x27;</span>,<span class="string">&#x27;devices&#x27;</span>],capture_output=<span class="literal">True</span>,shell=<span class="literal">True</span>,cwd=<span class="string">r&#x27;C:\Users&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>).stdout <span class="comment"># 执行shell命令，获取连接的adb设备，并获取输出结果</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.run(args,*, stdin=<span class="literal">None</span>, <span class="built_in">input</span>=<span class="literal">None</span>, stdout=<span class="literal">None</span>, stderr=<span class="literal">None</span>, capture_output=<span class="literal">False</span>, shell=<span class="literal">False</span>, cwd=<span class="literal">None</span>, timeout=<span class="literal">None</span>, check=<span class="literal">False</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>, text=<span class="literal">None</span>, env=<span class="literal">None</span>, universal_newlines=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>主要参数</strong></p>
+<ul>
+<li><code>args</code>：要执行的shell命令,字符串&#x2F;字符串列表，列表的话会使用空格将其串起来，字符串的话需要<code>shell=True</code></li>
+<li><code>stdin、stdout、stderr</code>：子进程的标准输入、输出和错误。其值可以是 subprocess.PIPE、subprocess.DEVNULL、一个已经存在的文件描述符、已经打开的文件对象或者 None。subprocess.PIPE 表示为子进程创建新的管道。subprocess.DEVNULL 表示使用 os.devnull。默认使用的是 None，表示什么都不做。另外，stderr 可以合并到 stdout 里一起输出。</li>
+<li><code>timeout</code>：设置命令超时时间。如果命令执行时间超时，子进程将被杀死，并弹出 TimeoutExpired 异常。</li>
+<li><code>check</code>：如果该参数设置为 True，并且进程退出状态码不是 0，则弹出 CalledProcessError 异常。</li>
+<li><code>encoding</code>: 如果指定了该参数，则 stdin、stdout 和 stderr 可以接收字符串数据，并以该编码方式编码。否则只接收 bytes 类型的数据。</li>
+<li><code>shell</code>：如果该参数为 True，将通过操作系统的 shell 执行指定的命令。</li>
+<li><code>cwd</code>：在哪个目录下执行命令</li>
+<li><code>capture_output</code>： 如果<code>capture_output=True</code>，则将捕获stdout和stderr，调用时内部的Popen对象将自动使用<code>stdout=PIPE</code>和<code>stderr = PIPE</code>创建标准输出和标准错误对象；传递<code>stdout</code>和<code>stderr</code>参数时不能同时传递<code>capture_output</code>参数。如果希望捕获并将两个stream合并为一个，使用<code>stdout=PIPE</code>和<code>stderr = STDOUT</code>。</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：<code>CompletedProcess</code>类，包含下列内容</p>
+<ul>
+<li><p><code>args</code>：启动进程的参数,通常是个列表或字符串</p>
+</li>
+<li><p><code>returncode</code>：进程结束状态返回码,0表示成功状态</p>
+</li>
+<li><p><code>stdout</code>：命令执行后的输出信息，通常为bytes类型序列，需要提前设置<code>encoding</code>，None表示没有捕获值</p>
+</li>
+<li><p><code>stderr</code>：命令执行后的错误信息，通常为bytes类型序列，需要提前设置<code>encoding</code>，None表示没有捕获值</p>
+</li>
+<li><p><code>check_returncode() </code>：用于检查返回码。如果返回状态码不为零，弹出CalledProcessError异常。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CompletedProcess(args=[<span class="string">&#x27;adb&#x27;</span>, <span class="string">&#x27;devices&#x27;</span>], returncode=<span class="number">0</span>, stdout=<span class="string">b&#x27;List of devices attached\r\n\r\n&#x27;</span>, stderr=<span class="string">b&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="subprocess-Popen"><a href="#subprocess-Popen" class="headerlink" title="subprocess.Popen()"></a>subprocess.Popen()</h3><ul>
+<li>subprocess模块中最基础的构造函数，上面讲的run()就是基于它的简化版</li>
+</ul>
+<ul>
+<li><p><strong>常用示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p = subprocess.Popen(<span class="string">&quot;adb devices&quot;</span>, shell=<span class="literal">True</span>, encoding=<span class="string">&quot;utf-8&quot;</span>, stdout=subprocess.PIPE)  <span class="comment"># 执行shell命令，获取连接的adb设备</span></span><br><span class="line">p.stdout   <span class="comment"># 获取输出结果</span></span><br><span class="line">p.kill()	<span class="comment"># 杀死进程</span></span><br><span class="line">p.wait()	<span class="comment"># 等待进程中止后再继续</span></span><br><span class="line"></span><br><span class="line">subprocess.Popen(<span class="string">&#x27;node main.js&#x27;</span>,shell=<span class="literal">True</span>,cwd=<span class="string">r&#x27;C:\Program Files (x86)\Appium\resources\app\node_modules\appium\build\lib&#x27;</span>) <span class="comment"># 启动Appium服务</span></span><br><span class="line">subprocess.Popen(<span class="string">&quot;netstat -nao | findstr :4723&quot;</span>, shell=<span class="literal">True</span>, encoding=<span class="string">&quot;utf-8&quot;</span>, stdout=subprocess.PIPE).stdout  <span class="comment"># 根据对应的端口判断Appium服务是否启动</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subprocess.Popen(args, bufsize=-<span class="number">1</span>, executable=<span class="literal">None</span>, stdin=<span class="literal">None</span>, stdout=<span class="literal">None</span>, stderr=<span class="literal">None</span>, preexec_fn=<span class="literal">None</span>, close_fds=<span class="literal">True</span>, shell=<span class="literal">False</span>, cwd=<span class="literal">None</span>, env=<span class="literal">None</span>, universal_newlines=<span class="literal">False</span>, startupinfo=<span class="literal">None</span>, creationflags=<span class="number">0</span>, restore_signals=<span class="literal">True</span>, start_new_session=<span class="literal">False</span>, pass_fds=(), *, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>, text=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>主要参数</strong></p>
+<ul>
+<li><code>args</code>：要执行的shell命令,字符串&#x2F;字符串列表，列表的话会使用空格将其串起来，字符串的话需要<code>shell=True</code></li>
+<li><code>bufsize</code>：缓冲区大小。当创建标准流的管道对象时使用，默认-1。<ul>
+<li>0：不使用缓冲区</li>
+<li>1：表示行缓冲，仅当universal_newlines&#x3D;True时可用，也就是文本模式</li>
+<li>正数：表示缓冲区大小</li>
+<li>负数：表示使用系统默认的缓冲区大小</li>
+</ul>
+</li>
+<li><code>stdin、stdout、stderr</code>：子进程的标准输入、输出和错误。其值可以是 subprocess.PIPE、subprocess.DEVNULL、一个已经存在的文件描述符、已经打开的文件对象或者 None。subprocess.PIPE 表示为子进程创建新的管道。subprocess.DEVNULL 表示使用 os.devnull。默认使用的是 None，表示什么都不做。另外，stderr 可以合并到 stdout 里一起输出。</li>
+<li><code>preexec_fn</code>：只在 Unix 平台下有效，用于指定一个可执行对象（callable object），它将在子进程运行之前被调用。</li>
+<li><code>timeout</code>：设置命令超时时间。如果命令执行时间超时，子进程将被杀死，并弹出 TimeoutExpired 异常。</li>
+<li><code>check</code>：如果该参数设置为 True，并且进程退出状态码不是 0，则弹出 CalledProcessError 异常。</li>
+<li><code>encoding</code>: 如果指定了该参数，则 stdin、stdout 和 stderr 可以接收字符串数据，并以该编码方式编码。否则只接收 bytes 类型的数据。</li>
+<li><code>shell</code>：如果该参数为 True，将通过操作系统的 shell 执行指定的命令。</li>
+<li><code>cwd</code>：在哪个目录下执行命令</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：Popen实例化的对象，包含下列方法</p>
+<ul>
+<li><p><code>poll()</code>：检查进程是否终止，如果终止返回 returncode，否则返回 None。</p>
+</li>
+<li><p><code>wait(timeout)</code>：等待子进程终止。</p>
+</li>
+<li><p>**<code>communicate(input,timeout)</code>**：和子进程交互，发送和读取数据，当参数为空时，默认读取子进程输出结果，类型为元组(“输出结果”，“错误信息”)。</p>
+</li>
+<li><p><code>send_signal(singnal)</code>：发送信号到子进程 。</p>
+</li>
+<li><p><code>terminate()</code>：停止子进程,也就是发送SIGTERM信号到子进程。</p>
+</li>
+<li><p><code>kill()</code>：杀死子进程。发送 SIGKILL 信号到子进程，kill之后建议跟上wait确定杀死</p>
+</li>
+<li><p><code>pid</code>：获取子进程的进程ID。</p>
+</li>
+<li><p><code>returncode</code>：获取进程的返回值。如果进程还没有结束，返回None。</p>
+</li>
+<li><p>**<code>stdout</code>**：命令执行后的输出信息，通常为bytes类型序列，需要提前设置<code>encoding</code>，None表示没有捕获值</p>
+</li>
+<li><p><code>stderr</code>：命令执行后的错误信息，通常为bytes类型序列，需要提前设置<code>encoding</code>，None表示没有捕获值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="run-和Popen-的重要区别"><a href="#run-和Popen-的重要区别" class="headerlink" title="run()和Popen()的重要区别"></a>run()和Popen()的重要区别</h3><table>
+<thead>
+<tr>
+<th align="left">区别</th>
+<th>run()</th>
+<th>Popen()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">创建子进程</td>
+<td>新创建一个进程，直接运行</td>
+<td>新创建一个管道，放到后台运行</td>
+</tr>
+<tr>
+<td align="left">等待子进程</td>
+<td>等待子进程执行完毕再继续</td>
+<td>无需等待子进程执行完毕，立即往下进行</td>
+</tr>
+<tr>
+<td align="left">其他</td>
+<td>相当于执行Popen()+communicate()</td>
+<td>可以调用communicate()向子进程传递和接受数据</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、os模块调用"><a href="#二、os模块调用" class="headerlink" title="二、os模块调用"></a>二、<a id="os">os模块调用</a></h2><ul>
+<li><p>Python自带的模块，使用前直接导入，主要处理操作系统相关的内容如对文件&#x2F;文件夹的操作</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="os-system"><a href="#os-system" class="headerlink" title="os.system()"></a>os.system()</h3><ul>
+<li><p><strong>常用示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(<span class="string">&quot;chdir&quot;</span>) <span class="comment"># 执行获取当前目录的shell命令</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(命令字符串)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>参数</strong></p>
+<ul>
+<li>shell命令，字符串形式</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：命令的退出状态码</p>
+<ul>
+<li>执行成功返回0</li>
+<li>执行失败返回1或其他</li>
+</ul>
+</li>
+</ul>
+<h3 id="os-popen"><a href="#os-popen" class="headerlink" title="os.popen()"></a>os.popen()</h3><ul>
+<li><p><strong>常用示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.popen(<span class="string">&quot;chdir&quot;</span>).read() <span class="comment"># 执行获取当前目录的shell命令，返回结果</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(命令字符串)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>参数</strong></p>
+<ul>
+<li>shell命令，字符串形式</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：命令的退出状态码</p>
+<ul>
+<li>执行成功返回0</li>
+<li>执行失败返回1或其他</li>
+</ul>
+</li>
+<li><p><strong>方法</strong></p>
+<ul>
+<li>read()可以将返回值转为字符串</li>
+</ul>
+</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>上述两个命令执行时默认会等待命令执行完毕才会继续进行，对于一些持续性命令，如开启Appium服务等并不友好，需要配合多线程并行使用</p>
+<hr>
+<h2 id="三、commands模块调用"><a href="#三、commands模块调用" class="headerlink" title="三、commands模块调用"></a>三、<a id="commands">commands模块调用</a></h2><ul>
+<li><p>非Python官方包，需要先安装，使用前直接导入，主要处理操作系统相关的内容如对文件&#x2F;文件夹的操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install command</span><br><span class="line"><span class="comment"># 使用时导入</span></span><br><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="commands-getstatusoutput"><a href="#commands-getstatusoutput" class="headerlink" title="commands.getstatusoutput()"></a>commands.getstatusoutput()</h3><ul>
+<li><p><strong>常用示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands.getstatusoutput(<span class="string">&quot;chdir&quot;</span>) <span class="comment"># 执行获取当前目录的shell命令</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands.getstatusoutput(命令字符串)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>参数</strong></p>
+<ul>
+<li>shell命令，字符串形式</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：(status,output)</p>
+<ul>
+<li>status：状态码</li>
+<li>output：输出结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="commands-getoutput"><a href="#commands-getoutput" class="headerlink" title="commands.getoutput()"></a>commands.getoutput()</h3><ul>
+<li><p><strong>常用示例</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands.getoutput(<span class="string">&quot;chdir&quot;</span>) <span class="comment"># 执行获取当前目录的shell命令</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commands.getoutput(命令字符串)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>参数</strong></p>
+<ul>
+<li>shell命令，字符串形式</li>
+</ul>
+</li>
+<li><p><strong>返回值</strong>：</p>
+<ul>
+<li>output：输出结果</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,7 +427,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -206,115 +440,35 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/03/%E6%96%B0%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95%E5%9B%BE%E7%89%87/" class="archive-article-date">
-  	<time datetime="2022-11-03T02:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/03/%E6%96%B0%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95%E5%9B%BE%E7%89%87/">新文章测试图片</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">test</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/其他/" class="article-tag-list-link color3">其他</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/11/01/Python%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E5%B0%81%E8%A3%85%E4%B8%BAexe/" class="archive-article-date">
-  	<time datetime="2022-10-31T16:23:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/01/Python%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85%E5%B0%81%E8%A3%85%E4%B8%BAexe/">Python文件打包封装为exe</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术/" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/11/03/%E6%96%B0%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95%E5%9B%BE%E7%89%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">新文章测试图片</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -337,8 +491,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
