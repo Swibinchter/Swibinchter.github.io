@@ -1,8 +1,10 @@
 ---
 title: 博客搭建-Hexo与GitHub Pages
 date: 2017-01-11 19:44:54
-tags: Hexo
-categories: 技术
+tags: 
+- Hexo
+categories: 
+- 技术
 ---
 ***
 ## 前记

@@ -1,8 +1,10 @@
 ---
 title: Python文件打包封装为exe
 date: 2022-11-01 00:23:35
-tags: [Python]
-categories: 技术
+tags: 
+- Python
+categories: 
+- 技术
 ---
 
 # Python文件打包封装为exe

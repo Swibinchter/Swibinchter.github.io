@@ -1,8 +1,11 @@
 ---
 title: Hexo博客主题文件夹无法完整push及clone
 date: 2017-01-11 19:31:35
-tags: [Hexo,Hexo theme]
-categories: 技术
+tags:
+- Hexo
+- Hexo theme
+categories: 
+- 技术
 ---
 ***
 ## 前记

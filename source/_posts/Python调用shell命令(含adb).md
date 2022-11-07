@@ -1,8 +1,12 @@
 ---
 title: Python调用shell命令(含adb)
 date: 2022-11-03 17:36:35
-tags: [Python][Shell][Adb]
-categories: 技术
+tags: 
+- Python
+- Shell
+- Adb
+categories: 
+- 技术
 ---
 
 # Python调用shell命令(含adb)

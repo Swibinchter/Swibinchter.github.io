@@ -1,8 +1,11 @@
 ---
 title: Git Github 简明教程
 date: 2017-01-11 17:05:19
-tags: [Git,Github]
-categories: 技术
+tags: 
+- Git
+- Github
+categories: 
+- 技术
 ---
 
 ***
@@ -199,6 +202,5 @@ git init //当前目录git化
 * 忽略特殊文件
 * 配置别名
 * 搭建Git服务器  
-
 
 ***

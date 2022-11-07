@@ -1,7 +1,10 @@
 ---
 title: ADB设备执行shell脚本
-tags: [Shell][Adb]
-categories: 技术
+tags: 
+- Shell
+- Adb
+categories:
+- 技术
 date: 2022-11-07 10:57:11
 ---
 
