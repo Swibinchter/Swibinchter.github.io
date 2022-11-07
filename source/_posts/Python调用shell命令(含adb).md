@@ -1,7 +1,7 @@
 ---
 title: Python调用shell命令(含adb)
 date: 2022-11-03 17:36:35
-tags: [Python]
+tags: [Python][Shell][Adb]
 categories: 技术
 ---
 
@@ -15,7 +15,7 @@ categories: 技术
 2. [os模块调用](#os)【不推荐】
 3. [commands模块调用](#commands)
 
-
+<!--more-->
 
 ------
 
@@ -50,7 +50,33 @@ adb connect IP地址:端口
 
 # 断开所有连接
 adb disconnect
+
+# root设备
+adb root
+
+# 进入设备的shell中，需要root权限
+adb shell
+
+# 重启adb服务
+adb kill-server
+adb start-server
+
+# 模拟按键，按键编号如下
+adb shell input keyevent 3
+adb shell input keyevent KEYCODE_HOME
+#主页键
+KEYCODE_HOME = 3
+#返回键
+KEYCODE_BACK = 4
+#电源键
+KEYCODE_POWER = 26
+#菜单键
+KEYCODE_MENU = 82
+#多任务键
+KEYCODE_APP_SWITCH = 187
 ```
+
+* 更多按键代码，参见[常用ADB命令模拟手机按键](https://blog.csdn.net/Answerxiaoai/article/details/122299416)
 
 
 
